@@ -12,7 +12,7 @@ Showcases your **live Discord Rich Presence, currently playing music (BTL Music 
 <br />
 
 [![Vercel Deployment](https://img.shields.io/badge/Deploy%20with-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/new)
-[![GitHub Stars](https://img.shields.io/github/stars/Balajitechlabs/discord-music?style=for-the-badge&color=22c55e)](https://github.com/Balajitechlabs/discord-music/stargazers)
+[![GitHub Stars](https://img.shields.io/github/stars/Balajitechlabs/discord-music-card?style=for-the-badge&color=22c55e)](https://github.com/Balajitechlabs/discord-music-card/stargazers)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](LICENSE)
 
 </div>
@@ -52,7 +52,7 @@ You can host your own private instance for maximum uptime and zero rate-limits:
 
 1. **Fork or Clone this repository:**
    ```bash
-   git clone https://github.com/Balajitechlabs/discord-music.git
+   git clone https://github.com/Balajitechlabs/discord-music-card.git
    ```
 2. **Deploy to Vercel:**
    - Import your repository into [Vercel](https://vercel.com).
