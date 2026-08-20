@@ -1,0 +1,206 @@
+@import "tailwindcss";
+
+:root {
+  /* Base */
+  --background: #f5f5f5;
+  --foreground: #18181b;
+
+  /* Cards & Panels */
+  --card: #ffffff;
+  --card-foreground: #18181b;
+  --card-border: #e4e4e7;
+
+  /* Inputs */
+  --input: #ffffff;
+  --input-border: #e4e4e7;
+  --input-border-focus: #a1a1aa;
+  --input-placeholder: #a1a1aa;
+
+  /* Muted / Secondary Text */
+  --muted: #f4f4f5;
+  --muted-foreground: #a1a1aa;
+  --muted-foreground-darker: #52525b;
+
+  /* Primary Buttons */
+  --primary: #18181b;
+  --primary-foreground: #ffffff;
+
+  /* Secondary Buttons */
+  --secondary: #ffffff;
+  --secondary-foreground: #52525b;
+  --secondary-border: #e4e4e7;
+  --secondary-hover: #f4f4f5;
+  --secondary-hover-foreground: #000000;
+
+  /* Reset Button */
+  --btn-reset-bg: #f4f4f5;
+  --btn-reset-fg: #71717a;
+  --btn-reset-hover: #e4e4e7;
+  --btn-reset-hover-fg: #000000;
+
+  /* Shadows */
+  --shadow-card: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --shadow-preview: 0 10px 15px -10px rgb(0 0 0 / 0.15);
+
+  /* Components Specifics */
+  --switch-bg: #f4f4f5;
+  --switch-slider: #ffffff;
+  --text-toggle-inactive: #a1a1aa;
+  
+  /* Footer Links */
+  --link-text: #52525b;
+  --link-decoration: #18181b;
+  --link-hover: #000000;
+
+  /* Active Button States */
+  --btn-active-bg: #ffffff;
+  --btn-active-border: #d4d4d8;
+  --btn-active-hover-bg: #f8f8f8;
+
+  /* Scrollbar */
+  --scrollbar-thumb: #a1a1aa;
+  --scrollbar-thumb-hover: #71717a;
+}
+
+.dark {
+  /* Base */
+  --background: #09090b;
+  --foreground: #f4f4f5;
+
+  /* Cards & Panels */
+  --card: rgb(24 24 27 / 0.5);
+  --card-foreground: #f4f4f5;
+  --card-border: #27272a;
+
+  /* Inputs */
+  --input: #18181b;
+  --input-border: #27272a;
+  --input-border-focus: #71717a;
+  --input-placeholder: #52525b;
+
+  /* Muted / Secondary Text */
+  --muted: #27272a;
+  --muted-foreground: #71717a;
+  --muted-foreground-darker: #d4d4d8;
+
+  /* Primary Buttons */
+  --primary: #f4f4f5;
+  --primary-foreground: #000000;
+
+  /* Secondary Buttons */
+  --secondary: #18181b;
+  --secondary-foreground: #a1a1aa;
+  --secondary-border: #27272a;
+  --secondary-hover: #27272a;
+  --secondary-hover-foreground: #ffffff;
+
+  /* Reset Button */
+  --btn-reset-bg: #27272a;
+  --btn-reset-fg: #a1a1aa;
+  --btn-reset-hover: #3f3f46;
+  --btn-reset-hover-fg: #ffffff;
+
+  /* Shadows */
+  --shadow-card: 0 0 20px -10px rgba(255,255,255,0.1);
+  --shadow-preview: 0 0 25px -15px rgba(255,255,255,0.25); 
+
+  /* Components Specifics */
+  --switch-bg: #09090b;
+  --switch-slider: #27272a;
+  --text-toggle-inactive: #a1a1aa;
+
+  /* Footer Links */
+  --link-text: #d4d4d8;
+  --link-decoration: #f4f4f5;
+  --link-hover: #ffffff;
+
+  /* Active Button States */
+  --btn-active-bg: #18181b;
+  --btn-active-border: #27272a;
+  --btn-active-hover-bg: #27272a;
+
+  /* Scrollbar */
+  --scrollbar-thumb: #3f3f46;
+  --scrollbar-thumb-hover: #52525b;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-card-border: var(--card-border);
+
+  --color-input: var(--input);
+  --color-input-border: var(--input-border);
+  --color-input-border-focus: var(--input-border-focus);
+  --color-input-placeholder: var(--input-placeholder);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted-foreground-darker: var(--muted-foreground-darker);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary-border: var(--secondary-border);
+  --color-secondary-hover: var(--secondary-hover);
+  --color-secondary-hover-foreground: var(--secondary-hover-foreground);
+
+  --color-btn-reset-bg: var(--btn-reset-bg);
+  --color-btn-reset-fg: var(--btn-reset-fg);
+  --color-btn-reset-hover: var(--btn-reset-hover);
+  --color-btn-reset-hover-fg: var(--btn-reset-hover-fg);
+
+  --shadow-custom-card: var(--shadow-card);
+  --shadow-custom-preview: var(--shadow-preview);
+
+  --color-switch-bg: var(--switch-bg);
+  --color-switch-slider: var(--switch-slider);
+  --color-text-toggle-inactive: var(--text-toggle-inactive);
+
+  --color-link-text: var(--link-text);
+  --color-link-decoration: var(--link-decoration);
+  --color-link-hover: var(--link-hover);
+
+  --color-btn-active-bg: var(--btn-active-bg);
+  --color-btn-active-border: var(--btn-active-border);
+  --color-btn-active-hover-bg: var(--btn-active-hover-bg);
+}
+
+
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+  transition: background-color 0.5s, color 0.5s;
+}
+
+/* Scrollbar */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-thumb);
+  border-radius: 20px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--scrollbar-thumb-hover);
+}
