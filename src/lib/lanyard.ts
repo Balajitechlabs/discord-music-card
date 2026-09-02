@@ -20,11 +20,11 @@ export async function getLanyardData(id: string, searchParams: URLSearchParams, 
 export function filterActivity(data: LanyardData, config: Config) {
     if (!data || !data.activities) return null;
     
-    return data.activities.find((act: Activity) => {
-        if (act.type === 4) return false;
+    const act = data.activities.find((a: Activity) => {
+        if (a.type === 4) return false;
         
-        const appId = act.application_id || '';
-        const appName = act.name.toLowerCase();
+        const appId = a.application_id || '';
+        const appName = a.name.toLowerCase();
         
         const isHidden = config.hiddenIds.some((hidden: string) => 
             hidden.toLowerCase() === appId.toLowerCase() || hidden.toLowerCase() === appName
@@ -32,4 +32,14 @@ export function filterActivity(data: LanyardData, config: Config) {
         
         return !isHidden;
     });
+
+    if (act) {
+        if (act.name && act.name.toLowerCase().includes("archivetune")) {
+            act.name = "BTL-Music";
+        }
+        if (act.details && act.details.toLowerCase().includes("archivetune")) {
+            act.details = act.details.replace(/ArchiveTune/gi, "BTL-Music");
+        }
+    }
+    return act;
 }
