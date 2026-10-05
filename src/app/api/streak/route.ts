@@ -34,31 +34,56 @@ export async function GET(request: NextRequest) {
     });
 
     try {
-        const upstreamUrl = `https://streak-stats.demolab.com/?${params.toString()}`;
+        let svg = '';
 
-        const res = await fetch(upstreamUrl, {
-            cache: 'no-store',
-            headers: {
-                'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-                'Accept': 'image/svg+xml,*/*',
-            },
-        });
+        // Attempt upstream with strict 2.5s timeout
+        try {
+            const upstreamUrl = `https://streak-stats.demolab.com/?${params.toString()}`;
+            const res = await fetch(upstreamUrl, {
+                cache: 'no-store',
+                signal: AbortSignal.timeout(2500),
+                headers: {
+                    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+                    'Accept': 'image/svg+xml,*/*',
+                },
+            });
 
-        if (!res.ok) {
-            return new NextResponse(
-                generateErrorCard('Streak Stats Error', `Failed to load streak stats (${res.status})`),
-                { headers: { 'Content-Type': 'image/svg+xml; charset=utf-8' } }
-            );
+            if (res.ok) {
+                svg = await res.text();
+            }
+        } catch {
+            // Upstream failed or timed out, gracefully continue to fallback
         }
 
-        const svg = await res.text();
+        // If upstream failed, fetch native monochrome streak card from GitHub
+        if (!svg || svg.includes('<svg') === false) {
+            const fallbackUrl = `https://raw.githubusercontent.com/Balajitechlabs/balajitechlabs/main/icons/streak.svg?_t=${Date.now()}`;
+            const fbRes = await fetch(fallbackUrl, {
+                cache: 'no-store',
+                signal: AbortSignal.timeout(3000),
+                headers: {
+                    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+                },
+            });
 
-        return new NextResponse(svg, {
-            headers: {
-                'Content-Type': 'image/svg+xml; charset=utf-8',
-                'Cache-Control': 'public, max-age=0, s-maxage=0, must-revalidate, no-cache',
-            },
-        });
+            if (fbRes.ok) {
+                svg = await fbRes.text();
+            }
+        }
+
+        if (svg) {
+            return new NextResponse(svg, {
+                headers: {
+                    'Content-Type': 'image/svg+xml; charset=utf-8',
+                    'Cache-Control': 'public, max-age=0, s-maxage=0, must-revalidate, no-cache',
+                },
+            });
+        }
+
+        return new NextResponse(
+            generateErrorCard('Streak Stats Error', 'Failed to load streak stats'),
+            { headers: { 'Content-Type': 'image/svg+xml; charset=utf-8' } }
+        );
     } catch {
         return new NextResponse(
             generateErrorCard('Internal Error', 'Failed to fetch streak stats.'),
